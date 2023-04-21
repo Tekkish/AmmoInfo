@@ -1,0 +1,15 @@
+user bool ai_alignvalue = false;
+user bool ai_alignx = false;
+user bool ai_aligny = false;
+user bool ai_doomfont = false;
+user bool ai_hide = false;
+user bool ai_highlightvalue = false;
+user bool ai_showcolor = false;
+user bool ai_showonmap = false;
+user bool ai_visible = true;
+user int ai_abbreviate = 0;
+user int ai_opacity = 100;
+user int ai_position = 5;
+user int ai_showpercentage = 0;
+user int ai_x = 0;
+user int ai_y = 0;

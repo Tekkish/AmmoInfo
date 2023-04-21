@@ -1,0 +1,465 @@
+/*---------------------\
+   AmmoInfo by Tekish
+\---------------------*/
+
+#library "ammoinfo"
+#include "zcommon.acs"
+#include "ammoassign.acs"
+
+#define AI_BASECOLOR	CR_WHITE
+#define AI_COLOR_DARK	"u"
+#define AI_COLOR_LOW	"k"
+#define AI_COLOR_MAX	"d"
+#define AI_COLOR_NONE	"a"
+#define AI_FLAGS		HUDMSG_PLAIN | HUDMSG_ALPHA | HUDMSG_NOWRAP
+#define AI_ID_TEXTS		160100
+#define AI_ID_VALUES	AI_ID_TEXTS + 1
+#define AI_LOWVALUE		25
+#define AI_MAXNUMBER	99999
+#define AI_REFRESH		3
+#define AI_SPACE		"`"
+#define AI_TICRATE		35
+#define AI_TIME			(AI_REFRESH << 16) / AI_TICRATE + 1
+
+int highlight[AI_TOTAL];
+str text[AI_TOTAL];
+str value[AI_TOTAL][3];
+
+/*------------\
+   Functions
+\------------*/
+
+function void alignvalue(bool align, int showpercentage)
+{
+	if (align || showpercentage == 1)
+	{
+		int maxleft = maxlength(1, false, 0);
+		int maxright = maxlength(2, false, 0);
+
+		if (showpercentage)
+		{
+			if (align)
+				int maxpercentage = maxlength(3, false, 0);
+			else
+				int maxtotal = maxlength(4, false, 0);
+		}
+	}
+
+	for (int i = 0; i < total; i++)
+	{
+		if (strcmp(text[i], ""))
+		{
+			if (showpercentage != 2)
+			{
+				if (align)
+				{
+					value[i][0] = strparam(s:generatespace(maxleft - strlen(value[i][0]), 0), s:value[i][0]);
+					value[i][1] = strparam(s:generatespace(maxright - strlen(value[i][1]), 0), s:value[i][1]);
+
+					if (showpercentage)
+						value[i][2] = strparam(s:generatespace(maxpercentage - strlen(value[i][2]) + 1, 0), s:value[i][2]);
+				}
+				else if (showpercentage)
+				{
+					value[i][2] = strparam(s:generatespace(maxtotal - strlen(value[i][0]) - strlen(value[i][1]) + 1, 0), s:value[i][2]);
+				}
+
+				value[i][0] = strparam(s:value[i][0], s:"/", s:value[i][1], s:value[i][2]);
+			}
+
+			if (align)
+				value[i][0] = strparam(s:generatespace(maxlength(1, false, 0) - strlen(value[i][0]), 0), s:value[i][0]);
+		}
+	}
+}
+
+function str coloredtext(str color, str string, bool addcolor)
+{
+	if (addcolor)
+		return strparam(s:"\c", s:color, s:string, s:"\c-");
+
+	return string;
+}
+
+function str generatespace(int amount, int type)
+{
+	str space = "";
+
+	for (int i = 0; i < amount; i++)
+	{
+		switch (type)
+		{
+			case 1:
+				space = strparam(s:space, s:AI_SPACE, s:"\n");
+				break;
+
+			case 2:
+				space = strparam(s:space, s:"\n", s:AI_SPACE);
+				break;
+
+			default:
+				space = strparam(s:space, s:AI_SPACE);
+		}
+	}
+
+	return space;
+}
+
+function int maxlength(int align, bool index, int limit)
+{
+	int length, max, maxindex;
+
+	if (!limit)
+		limit = total;
+
+	for (int i = 0; i < limit; i++)
+	{
+		switch (align)
+		{
+			case 0:
+				length = strlen(text[i]);
+				break;
+
+			case 1:
+				length = strlen(value[i][0]);
+				break;
+
+			case 2:
+				length = strlen(value[i][1]);
+				break;
+
+			case 3:
+				length = strlen(value[i][2]);
+				break;
+				
+			default:
+				length = strlen(value[i][0]) + strlen(value[i][1]);
+		}
+
+		if (length > max)
+		{
+			maxindex = i;
+			max = length;
+		}
+	}
+
+	if (index)
+		return maxindex;
+
+	return max;
+}
+
+function int maxnumber(int number, int maximum)
+{
+	if (number > maximum)
+		return maximum;
+
+	return number;
+}
+
+function str newline(str string)
+{
+	if (strcmp(string, ""))
+		return strparam(s:string, s:"\n");
+
+	return string;
+}
+
+function void spaceright(str space, int align)
+{
+	int i = maxlength(align, true, 0);
+
+	if (!align)
+		text[i] = strparam(s:text[i], s:space);
+	else
+		value[i][0] = strparam(s:value[i][0], s:space);
+}
+
+/*-------\
+   Core
+\-------*/
+
+function void ammoinfo(void)
+{
+	if (getcvar("ai_visible") && total && (!standard || (standard && !getcvar("ai_hide"))))
+	{
+		bool alignx, aligny;
+		bool position = getcvar("ai_position");
+		int offsetx = 1;
+		int offsety = 1;
+		int x, y;
+		str marginbottom = "", marginleft = "", margintop = "";
+
+		switch (position)
+		{
+			case 0:
+				alignx = getcvar("ai_alignx");
+				aligny = getcvar("ai_aligny");
+				x = getcvar("ai_x");
+				y = getcvar("ai_y");
+
+				if (x < 0 || x > 90)
+					x = 0;
+
+				if (y < 0 || y > 50)
+					y = 0;
+
+				offsetx = x + offsetx;
+				offsety = y + offsety;
+
+				if (!alignx)
+				{
+					marginleft = generatespace(offsetx, 0);
+					x = 0.0;
+				}
+				else
+				{
+					x = 1.0;
+				}
+
+				if (!aligny)
+				{
+					margintop = generatespace(offsety, 1);
+					y = 0.0;
+				}
+				else
+				{
+					marginbottom = generatespace(offsety, 2);
+					y = 1.0;
+				}
+
+				break;
+
+			case 1:
+				alignx = false;
+				marginleft = generatespace(offsetx, 0);
+				margintop = generatespace(offsety, 1);
+				x = 0.0;
+				y = 0.0;
+				break;
+
+			case 2:
+				alignx = false;
+				marginleft = generatespace(offsetx, 0);
+				x = 0.0;
+				y = 0.5;
+				break;
+
+			case 3:
+				alignx = false;
+				marginbottom = generatespace(offsety, 2);
+				marginleft = generatespace(offsetx, 0);
+				x = 0.0;
+				y = 1.0;
+				break;
+
+			case 4:
+				alignx = true;
+				margintop = generatespace(offsety, 1);
+				x = 1.0;
+				y = 0.0;
+				break;
+
+			case 6:
+				alignx = true;
+				marginbottom = generatespace(offsety, 2);
+				x = 1.0;
+				y = 1.0;
+				break;
+
+			default:
+				alignx = true;
+				x = 1.0;
+				y = 0.5;
+		}
+
+		bool highlightvalue = getcvar("ai_highlightvalue");
+		int capacity, current, flags, i, percentage;
+		int abbreviate = getcvar("ai_abbreviate");
+		int showpercentage = getcvar("ai_showpercentage");
+
+		if (abbreviate < 0 || abbreviate > 8)
+			abbreviate = 4;
+
+		if (showpercentage < 0 || showpercentage > 2)
+			showpercentage = 0;
+
+		for (i = 0; i < total; i++)
+		{
+			capacity = maxnumber(getammocapacity(ammo[i][0]), AI_MAXNUMBER);
+
+			if (capacity)
+			{
+				if (strcmp(ammo[i][1], ""))
+					text[i] = ammo[i][1];
+				else
+					text[i] = ammo[i][0];
+
+				if (abbreviate)
+					text[i] = strleft(text[i], abbreviate);
+
+				current = maxnumber(checkinventory(ammo[i][0]), AI_MAXNUMBER);
+				percentage = 100 * current / capacity;
+
+				if (highlightvalue)
+				{
+					if (current < 1)
+						highlight[i] = 1;
+					else if (percentage <= AI_LOWVALUE)
+						highlight[i] = 2;
+					else if (current == capacity)
+						highlight[i] = 3;
+					else
+						highlight[i] = 0;
+				}
+
+				if (showpercentage != 2)
+				{
+					value[i][0] = strparam(d:current);
+					value[i][1] = strparam(d:capacity);
+				}
+
+				if (showpercentage)
+				{
+					percentage = strparam(d:percentage, s:"%");
+
+					if (showpercentage == 2)
+						value[i][0] = percentage;
+					else
+						value[i][2] = percentage;
+				}
+				else
+				{
+					value[i][2] = "";
+				}
+			}
+			else
+			{
+				text[i] = "";
+				value[i][0] = "";
+				value[i][1] = "";
+				value[i][2] = "";
+			}
+		}
+
+		bool showcolor = getcvar("ai_showcolor");
+		bool valuehighlight;
+		str spaceleft = "", textcolor = "", texts = "", valuecolor = "", values = "";
+
+		alignvalue(getcvar("ai_alignvalue"), showpercentage);
+
+		if (!alignx)
+		{
+			spaceleft = generatespace(maxlength(0, false, 0) + offsetx + 1, 0);
+		}
+		else
+		{
+			spaceright(generatespace(maxlength(1, false, 0) + offsetx + 1, 0), 0);
+			spaceright(generatespace(offsetx, 0), 1);
+		}
+
+		for (i = 0; i < total; i++)
+		{
+			if (strcmp(text[i], ""))
+			{
+				if (highlightvalue && highlight[i] == 1)
+				{
+					valuecolor = AI_COLOR_NONE;
+					valuehighlight = true;
+				}
+				else if (highlightvalue && highlight[i] == 2)
+				{
+					valuecolor = AI_COLOR_LOW;
+					valuehighlight = true;
+				}
+				else if (highlightvalue && highlight[i] == 3)
+				{
+					valuecolor = AI_COLOR_MAX;
+					valuehighlight = true;
+				}
+				else
+				{
+					valuehighlight = false;
+				}
+
+				if (showcolor && strcmp(ammo[i][2], ""))
+					textcolor = ammo[i][2];
+				else
+					textcolor = AI_COLOR_DARK;
+
+				texts = strparam(s:newline(texts), s:marginleft, s:coloredtext(textcolor, text[i], true));
+				values = strparam(s:newline(values), s:spaceleft, s:coloredtext(valuecolor, value[i][0], valuehighlight));
+			}
+		}
+
+		if (strcmp(texts, ""))
+		{
+			bool showonmap = getcvar("ai_showonmap");
+			int opacity = getcvar("ai_opacity");
+			str font = "SHAFONT";
+
+			if (showonmap)
+				flags = AI_FLAGS;
+			else
+				flags = AI_FLAGS | HUDMSG_NOTWITHFULLMAP;
+				
+			if (getcvar("ai_doomfont"))
+				font = "SHADFONT";
+
+			if (opacity < 10 || opacity > 100)
+				opacity = 100;
+
+			opacity = fixeddiv(opacity << 16, 100.0);
+
+			setfont(font);
+			hudmessage(s:margintop, s:texts, s:marginbottom; flags, AI_ID_TEXTS, AI_BASECOLOR, x, y, AI_TIME, opacity);
+			hudmessage(s:margintop, s:values, s:marginbottom; flags, AI_ID_VALUES, AI_BASECOLOR, x, y, AI_TIME, opacity);
+		}
+	}
+}
+
+script "ammoinfo" (void)
+{
+	ammoinfo();
+	delay(AI_REFRESH);
+	restart;
+}
+
+script "ammoinfodeath" DEATH
+{
+	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
+		terminate;
+
+	acs_namedterminate("ammoinfo", 0);
+}
+
+script "ammoinfoenter" ENTER
+{
+	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
+		terminate;
+
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
+		terminate;
+
+	for (int i = 0; i < total; i++)
+	{
+		text[i] = "";
+		value[i][0] = "";
+		value[i][1] = "";
+		value[i][2] = "";
+	}
+
+	ammoassign(getactorclass(0));
+	acs_namedexecute("ammoinfo", 0);
+}
+
+script "ammoinforespawn" RESPAWN
+{
+	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
+		terminate;
+
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
+		terminate;
+
+	acs_namedexecute("ammoinfo", 0);
+}

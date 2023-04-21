@@ -1,0 +1,11 @@
+/*---------------------\
+   AmmoInfo by Tekish
+\---------------------*/
+
+class ammoinfobridge
+{
+	ui private static int getconsoleplayer()
+	{
+		return consoleplayer;
+	}
+}

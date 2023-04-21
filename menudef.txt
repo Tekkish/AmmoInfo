@@ -1,0 +1,79 @@
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "AmmoInfo Options", "AI_Options"
+}
+
+OptionMenu "AI_Options"
+{
+	Title "AmmoInfo Options"
+	Option "Show AmmoInfo", "ai_visible", "AI_YesNo"
+	StaticText ""
+	StaticText "General Options", 1
+	ScaleSlider "Abbreviated Characters", "ai_abbreviate", 0, 8, 1, "None"
+	Option "Hide With Unknown Mods", "ai_hide", "AI_YesNo"
+	Option "Highlight Values", "ai_highlightvalue", "AI_YesNo"
+	Slider "Opacity Percentage", "ai_opacity", 10, 100, 1, 0
+	Option "Show Colored Text", "ai_showcolor", "AI_YesNo"
+	Option "Show on Automap", "ai_showonmap", "AI_YesNo"
+	Option "Show Percentages", "ai_showpercentage", "AI_ShowPercentage"
+	Option "Use Doom Font", "ai_doomfont", "AI_YesNo"
+	Option "Value Alignment", "ai_alignvalue", "AI_AlignValue"
+	StaticText ""
+	StaticText "Position Options", 1
+	StaticText "You can specify a custom position"
+	StaticText "for AmmoInfo below. Note that it's"
+	StaticText "possible to exceed the boundries of the"
+	StaticText "screen if a low resolution is being used."
+	StaticText ""
+	Option "Position Preset", "ai_position", "AI_Position"
+	StaticText ""
+	StaticText "If the chosen preset is custom, you"
+	StaticText "can further tweak the position below."
+	StaticText ""
+	Option "Horizontal Alignment", "ai_alignx", "AI_AlignX"
+	Slider "Horizontal Position", "ai_x", 0, 90, 1, 0
+	Option "Vertical Alignment", "ai_aligny", "AI_AlignY"
+	Slider "Vertical Position", "ai_y", 0, 50, 1, 0
+}
+
+OptionValue "AI_AlignValue"
+{
+	0, "Standard"
+	1, "Numeric"
+}
+
+OptionValue "AI_AlignX"
+{
+	0, "Left"
+	1, "Right"
+}
+
+OptionValue "AI_AlignY"
+{
+	0, "Top"
+	1, "Bottom"
+}
+
+OptionValue "AI_Position"
+{
+	0, "Custom"
+	1, "Top Left"
+	2, "Center Left"
+	3, "Bottom Left"
+	4, "Top Right"
+	5, "Center Right"
+	6, "Bottom Right"
+}
+
+OptionValue "AI_ShowPercentage"
+{
+	0, "No"
+	1, "With Ammo Counts"
+	2, "Replace Ammo Counts"
+}
+
+OptionValue "AI_YesNo"
+{
+	0, "No"
+	1, "Yes"
+}

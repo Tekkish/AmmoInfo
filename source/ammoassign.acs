@@ -1,0 +1,273 @@
+/*--------------------------------\
+   AmmoInfo Assignment by Tekish
+\--------------------------------*/
+
+#define AI_TOTAL 11
+
+bool standard;
+int total;
+str ammo[AI_TOTAL][3];
+
+function void ammoassign(str class)
+{
+	// Argent
+	if (class == "ArgPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "Clip";						ammo[0][1] = "Bullet";		ammo[0][2] = "u";
+		ammo[1][0] = "Shell";						ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "ArgRocketAmmo";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "Cell";						ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "ArgBFGAmmo";					ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+
+	// Ashes 2063, Ashes Afterglow
+	else if (class == "Scavenger")
+	{
+		total = 9;
+		ammo[0][0] = "FortyFiveAmmo";				ammo[0][1] = "Bullet";		ammo[0][2] = "u";
+		ammo[1][0] = "NineMilAmmo";					ammo[1][1] = "Clip";		ammo[1][2] = "w";
+		ammo[2][0] = "ShotgunAmmo";					ammo[2][1] = "Shell";		ammo[2][2] = "g";
+		ammo[3][0] = "NapalmAmmo";					ammo[3][1] = "Fuel";		ammo[3][2] = "i";
+		ammo[4][0] = "PipeAmmo";					ammo[4][1] = "Pipebomb";	ammo[4][2] = "k";
+		ammo[5][0] = "SlugAmmo";					ammo[5][1] = "Slug";		ammo[5][2] = "n";
+		ammo[6][0] = "FalAmmo";						ammo[6][1] = "Rifle";		ammo[6][2] = "p";
+		ammo[7][0] = "RifleAmmo";					ammo[7][1] = "Rifle";		ammo[7][2] = "p";
+		ammo[8][0] = "Batteries";					ammo[8][1] = "Battery";		ammo[8][2] = "v";
+	}
+
+	// Brutal Doom
+	else if (class == "BDoomer" || class == "Doomer2" || class == "TacticalDoomer")
+	{
+		total = 11;
+		ammo[0][0] = "Clip1";						ammo[0][1] = "Clip";		ammo[0][2] = "w";
+		ammo[1][0] = "AmmoShell";					ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "Clip2";						ammo[2][1] = "Bullet";		ammo[2][2] = "u";
+		ammo[3][0] = "BuzzSawAmmo";					ammo[3][1] = "Buzzsaw";		ammo[3][2] = "p";
+		ammo[4][0] = "AmmoRocket";					ammo[4][1] = "Rocket";		ammo[4][2] = "k";
+		ammo[5][0] = "Nuke";						ammo[5][1] = "Nuke";		ammo[5][2] = "s";
+		ammo[6][0] = "AmmoCell";					ammo[6][1] = "Cell";		ammo[6][2] = "d";
+		ammo[7][0] = "SoulAmmo";					ammo[7][1] = "Soul";		ammo[7][2] = "a";
+		ammo[8][0] = "MiniHellRocketAmmo";			ammo[8][1] = "Hellshot";	ammo[8][2] = "r";
+		ammo[9][0] = "Gas";							ammo[9][1] = "Fuel";		ammo[9][2] = "i";
+		ammo[10][0] = "GrenadeAmmo";				ammo[10][1] = "Grenade";	ammo[10][2] = "q";
+	}
+	else if (class == "Purist")
+	{
+		total = 4;
+		ammo[0][0] = "Clip2";						ammo[0][1] = "Bullet";		ammo[0][2] = "u";
+		ammo[1][0] = "AmmoShell";					ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "AmmoRocket";					ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "AmmoCell";					ammo[3][1] = "Cell";		ammo[3][2] = "d";
+	}
+
+	// Brutal Doom 64
+	else if ((class == "64DoomPlayer" || class == "Tactical64DoomPlayer") && checkinventory("Stamina"))
+	{
+		total = 6;
+		ammo[0][0] = "SawGas";						ammo[0][1] = "Fuel";		ammo[0][2] = "i";
+		ammo[1][0] = "Clip";						ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "Shell";						ammo[2][1] = "Shell";		ammo[2][2] = "g";
+		ammo[3][0] = "RocketAmmo";					ammo[3][1] = "Rocket";		ammo[3][2] = "k";
+		ammo[4][0] = "Cell";						ammo[4][1] = "Cell";		ammo[4][2] = "d";
+		ammo[5][0] = "SoulAmmo";					ammo[5][1] = "Soul";		ammo[5][2] = "a";
+	}
+
+	// Death Foretold
+	else if (class == "Doom4Player")
+	{
+		total = 6;
+		ammo[0][0] = "D4Shells";					ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "D4Bullets";					ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "D4Rockets";					ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "D4Cells";						ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "D4Slugs";						ammo[4][1] = "Slug";		ammo[4][2] = "n";
+		ammo[5][0] = "D4Souls";						ammo[5][1] = "Soul";		ammo[5][2] = "a";
+	}
+
+	// Doom Incarnate
+	else if (class == "BloodRayne" || class == "CaptainBlazkowicz")
+	{
+		total = 11;
+		ammo[0][0] = "9MMBullets";					ammo[0][1] = "Clip";		ammo[0][2] = "w";
+		ammo[1][0] = "MagnumBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "ShotgunShells";				ammo[2][1] = "Shell";		ammo[2][2] = "g";
+		ammo[3][0] = "NATOBullets";					ammo[3][1] = "Nato";		ammo[3][2] = "p";
+		ammo[4][0] = "VenomAmmo";					ammo[4][1] = "Venom";		ammo[4][2] = "c";
+		ammo[5][0] = "ExplosiveSlugs";				ammo[5][1] = "Slug";		ammo[5][2] = "k";
+		ammo[6][0] = "NapalmAmmo";					ammo[6][1] = "Fuel";		ammo[6][2] = "i";
+		ammo[7][0] = "Battery";						ammo[7][1] = "Battery";		ammo[7][2] = "n";
+		ammo[8][0] = "FusionCell";					ammo[8][1] = "Cell";		ammo[8][2] = "v";
+		ammo[9][0] = "HatchetAmmo";					ammo[9][1] = "Hatchet";		ammo[9][2] = "z";
+		ammo[10][0] = "HandNadeAmmo";				ammo[10][1] = "Grenade";	ammo[10][2] = "q";
+	}
+
+	// Flakes Doom
+	else if (class == "FKPlayer" && checkinventory("FirstTimeShotgunning"))
+	{
+		total = 5;
+		ammo[0][0] = "Clip";						ammo[0][1] = "Bullet";		ammo[0][2] = "u";
+		ammo[1][0] = "Shell";						ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "RocketAmmo";					ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "GrenadeAmmo";					ammo[3][1] = "Grenade";		ammo[3][2] = "q";
+		ammo[4][0] = "Cell";						ammo[4][1] = "Cell";		ammo[4][2] = "d";
+	}
+
+	// Final Doomer
+	else if (class == "FDAliensPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDAliensShells";				ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDAliensBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDAliensRocket";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDAliensCell";				ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDAliensBFGCharge";			ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDAlienVendettaPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDAlienVendettaShells";		ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDAlienVendettaBullets";		ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDAlienVendettaRocket";		ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDAlienVendettaCell";			ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDAlienVendettaBFGCharge";	ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDBTSXPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDBTSXShells";				ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDBTSXBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDBTSXRocket";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDBTSXCell";					ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDBTSXBFGCharge";				ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDDoom2Player")
+	{
+		total = 5;
+		ammo[0][0] = "FDDoom2Shells";				ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDDoom2Bullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDDoom2Rocket";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDDoom2Cell";					ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDDoom2BFGCharge";			ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDHellboundPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDHellboundShells";			ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDHellboundBullets";			ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDHellboundRocket";			ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDHellboundCell";				ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDHellboundBFGCharge";		ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDJPCPPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDJPCPShells";				ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDJPCPBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDJPCPRocket";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDJPCPCell";					ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDJPCPBFGCharge";				ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDPlutPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDPlutShells";				ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDPlutBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDPlutRocket";				ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDPlutCell";					ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDPlutBFGCharge";				ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDTNTPlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDTNTShells";					ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDTNTBullets";				ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDTNTRocket";					ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDTNTCell";					ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDTNTBFGCharge";				ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+	else if (class == "FDWhitemarePlayer")
+	{
+		total = 5;
+		ammo[0][0] = "FDWhitemareShells";			ammo[0][1] = "Shell";		ammo[0][2] = "g";
+		ammo[1][0] = "FDWhitemareBullets";			ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "FDWhitemareRocket";			ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "FDWhitemareCell";				ammo[3][1] = "Cell";		ammo[3][2] = "v";
+		ammo[4][0] = "FDWhitemareBFGCharge";		ammo[4][1] = "BFG";			ammo[4][2] = "d";
+	}
+
+	// Heretic, Shazam
+	else if (class == "HereticPlayer" || class == "ShazamHereticPlayer")
+	{
+		total = 6;
+		ammo[0][0] = "GoldWandAmmo";				ammo[0][1] = "Wand";		ammo[0][2] = "f";
+		ammo[1][0] = "CrossbowAmmo";				ammo[1][1] = "Arrow";		ammo[1][2] = "d";
+		ammo[2][0] = "BlasterAmmo";					ammo[2][1] = "Claw";		ammo[2][2] = "n";
+		ammo[3][0] = "SkullRodAmmo";				ammo[3][1] = "Hell";		ammo[3][2] = "g";
+		ammo[4][0] = "PhoenixRodAmmo";				ammo[4][1] = "Flame";		ammo[4][2] = "k";
+		ammo[5][0] = "MaceAmmo";					ammo[5][1] = "Mace";		ammo[5][2] = "u";
+	}
+
+	// Hexen
+	else if (class == "ClericPlayer" || class == "FighterPlayer" || class == "MagePlayer")
+	{
+		total = 2;
+		ammo[0][0] = "Mana1";						ammo[0][1] = "Blue";		ammo[0][2] = "n";
+		ammo[1][0] = "Mana2";						ammo[1][1] = "Green";		ammo[1][2] = "d";
+	}
+
+	// NAKU-NARU
+	else if (class == "NewPlayer")
+	{
+		total = 7;
+		ammo[0][0] = "Ammo44";						ammo[0][1] = ".38";			ammo[0][2] = "u";
+		ammo[1][0] = "shells12gauge";				ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "Ammo9mm";						ammo[2][1] = "9mm";			ammo[2][2] = "w";
+		ammo[3][0] = "Ammo84mm";					ammo[3][1] = "Slug";		ammo[3][2] = "k";
+		ammo[4][0] = "Ammo77";						ammo[4][1] = "7mm";			ammo[4][2] = "b";
+		ammo[5][0] = "Ammo556";						ammo[5][1] = "5mm";			ammo[5][2] = "p";
+		ammo[6][0] = "TotalSkulls";					ammo[6][1] = "Skull";		ammo[6][2] = "a";
+	}
+
+	// Project Brutality
+	else if (class == "PB_Doomer")
+	{
+		total = 10;
+		ammo[0][0] = "PistolBullets";				ammo[0][1] = "Clip";		ammo[0][2] = "w";
+		ammo[1][0] = "NewClip";						ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "NewShell";					ammo[2][1] = "Shell";		ammo[2][2] = "g";
+		ammo[3][0] = "RocketAmmo";					ammo[3][1] = "Rocket";		ammo[3][2] = "k";
+		ammo[4][0] = "Cell";						ammo[4][1] = "Cell";		ammo[4][2] = "d";
+		ammo[5][0] = "Gas";							ammo[5][1] = "Fuel";		ammo[5][2] = "i";
+		ammo[6][0] = "DemonPower";					ammo[6][1] = "Soul";		ammo[6][2] = "a";
+		ammo[7][0] = "HandGrenadeAmmo";				ammo[7][1] = "Grenade";		ammo[7][2] = "q";
+		ammo[8][0] = "MineAmmo";					ammo[8][1] = "Mine";		ammo[8][2] = "z";
+		ammo[9][0] = "StunGrenadeAmmo";				ammo[9][1] = "Stun";		ammo[9][2] = "n";
+	}
+
+	// Weapons of Saturn
+	else if (class == "PistolPlayer" || class == "RiflePlayer")
+	{
+		total = 7;
+		ammo[0][0] = "Clip";						ammo[0][1] = "Clip";		ammo[0][2] = "w";
+		ammo[1][0] = "Bullets";						ammo[1][1] = "Bullet";		ammo[1][2] = "u";
+		ammo[2][0] = "Shell";						ammo[2][1] = "Shell";		ammo[2][2] = "g";
+		ammo[3][0] = "RifleAmmo";					ammo[3][1] = "Rifle";		ammo[3][2] = "b";
+		ammo[4][0] = "Nato";						ammo[4][1] = "Nato";		ammo[4][2] = "p";
+		ammo[5][0] = "RocketAmmo";					ammo[5][1] = "Rocket";		ammo[5][2] = "k";
+		ammo[6][0] = "Cell";						ammo[6][1] = "Cell";		ammo[6][2] = "d";
+	}
+
+	// Doom
+	else
+	{
+		if (class != "DoomPlayer")
+			standard = true;
+
+		total = 4;
+		ammo[0][0] = "Clip";						ammo[0][1] = "Bullet";		ammo[0][2] = "u";
+		ammo[1][0] = "Shell";						ammo[1][1] = "Shell";		ammo[1][2] = "g";
+		ammo[2][0] = "RocketAmmo";					ammo[2][1] = "Rocket";		ammo[2][2] = "k";
+		ammo[3][0] = "Cell";						ammo[3][1] = "Cell";		ammo[3][2] = "d";
+	}
+}
