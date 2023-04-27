@@ -1,0 +1,70 @@
+// ------------------------
+// AmmoInfo Assignment Lump
+// ------------------------
+//
+// This file allows you to customize AmmoInfo's ammo list without having to modify any source code. It is processed when
+// found in the root of any loaded archive. If multiple lumps are detected, only the last one in the load order will be
+// read. A maximum of 25 ammo types can be assigned at once.
+//
+// Ammo assignments consist of 3 comma-separated values that are differentiated by newlines. The order of the list is
+// determined by the order of the input. The syntax for adding ammo types is straightforward:
+//
+// AmmoClass, AmmoName, AmmoColor
+//
+// AmmoClass is the class name assigned to an ammo type. AmmoName is the name you wish to display in the list. AmmoColor
+// is the color you wish to use when "show colored text" is enabled. This uses the ZDoom color codes found at
+// "https://zdoom.org/wiki/Print#Colors". If you do not wish to specify a color, you can set this to "default" and the
+// internal default (dark gray) will be used.
+//
+// Here are some examples:
+//
+// Clip, Bullet, u
+//
+// This will add an ammo type with the "Clip" class, display "Bullet" in the list, and use the dark gray color.
+//
+// RocketAmmo, Rocket, default
+//
+// This will add an ammo type with the "RocketAmmo" class, display "Rocket" in the list, and use the default color.
+//
+// In addition to ammo types, you can also specify a player class to restrict them to. This can be used with mods that
+// employ different ammo types for each player class. To have an ammo type show only when a specific class is loaded, use
+// the class identifier:
+//
+// Class DoomPlayer
+//     Clip, Bullet, u
+//
+// This will tell AmmoInfo to only include bullets when the "DoomPlayer" class has been detected. You can combine this
+// with the "Class Unset" command to have ammo types appear with all player classes:
+//
+// Class DoomPlayer
+//     Clip, Bullet, u
+//     Shell, Shell, g
+// Class Unset
+// Cell, Cell, d
+//
+// The above will show bullets and shells when "DoomPlayer" is detected and display cells to all player classes.
+//
+// For a final example, see the default configuration below. It will display the appropriate ammo types for Doom,
+// Heretic, and Hexen.
+
+Class DoomPlayer
+	Clip, Bullet, u
+	Shell, Shell, g
+	RocketAmmo, Rocket, k
+	Cell, Cell, d
+Class HereticPlayer
+	GoldWandAmmo, Wand, f
+	CrossbowAmmo, Arrow, d
+	BlasterAmmo, Claw, n
+	SkullRodAmmo, Hell, g
+	PhoenixRodAmmo, Flame, k
+	MaceAmmo, Mace, u
+Class ClericPlayer
+	Mana1, Blue, n
+	Mana2, Green, d
+Class FighterPlayer
+	Mana1, Blue, n
+	Mana2, Green, d
+Class MagePlayer
+	Mana1, Blue, n
+	Mana2, Green, d

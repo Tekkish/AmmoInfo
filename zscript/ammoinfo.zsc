@@ -4,8 +4,336 @@
 
 class ammoinfobridge
 {
+	ui private static string ammoassign()
+	{
+		int lump = -1;
+		int lumps;
+		playerinfo player = players[consoleplayer];
+		string ammoassignment;
+		string standard = "0";
+
+		for (int i = 0; lumps != -1; i++)
+		{
+			lumps = wads.findlump("AIASSIGN", i, Wads.GLOBALNAMESPACE);
+
+			if (lumps >= 0)
+				lump++;
+		}
+
+		if (lump != -1)
+		{
+			ammoassignment = wads.readlump(lump);
+		}
+		else
+		{
+			string playerclass = player.mo.getclassname();
+
+			// Argent
+			if (playerclass == "ArgPlayer")
+			{
+				ammoassignment =
+					"Clip, Bullet, u"						.. "\n" ..
+					"Shell, Shell, g"						.. "\n" ..
+					"ArgRocketAmmo, Rocket, k"				.. "\n" ..
+					"Cell, Cell, v"							.. "\n" ..
+					"ArgBFGAmmo, BFG, d";
+			}
+
+			// Ashes 2063, Ashes Afterglow
+			else if (playerclass == "Scavenger")
+			{
+				ammoassignment =
+					"FortyFiveAmmo, Bullet, u"				.. "\n" ..
+					"NineMilAmmo, Clip, w"					.. "\n" ..
+					"ShotgunAmmo, Shell, g"					.. "\n" ..
+					"NapalmAmmo, Fuel, i"					.. "\n" ..
+					"PipeAmmo, Pipebomb, k"					.. "\n" ..
+					"SlugAmmo, Slug, n"						.. "\n" ..
+					"FalAmmo, Rifle, p"						.. "\n" ..
+					"RifleAmmo, Rifle, p"					.. "\n" ..
+					"Batteries, Battery, v";
+			}
+
+			// Brutal Doom
+			else if (playerclass == "BDoomer" || playerclass == "Doomer2" || playerclass == "TacticalDoomer")
+			{
+				ammoassignment =
+					"Clip1, Clip, w"						.. "\n" ..
+					"AmmoShell, Shell, g"					.. "\n" ..
+					"Clip2, Bullet, u"						.. "\n" ..
+					"BuzzSawAmmo, Buzzsaw, p"				.. "\n" ..
+					"AmmoRocket, Rocket, k"					.. "\n" ..
+					"Nuke, Nuke, s"							.. "\n" ..
+					"AmmoCell, Cell, d"						.. "\n" ..
+					"SoulAmmo, Soul, a"						.. "\n" ..
+					"MiniHellRocketAmmo, Hellshot, r"		.. "\n" ..
+					"Gas, Fuel, i"							.. "\n" ..
+					"GrenadeAmmo, Grenade, q";
+			}
+			else if (playerclass == "Purist")
+			{
+				ammoassignment =
+					"Clip2, Bullet, u"						.. "\n" ..
+					"AmmoShell, Shell, g"					.. "\n" ..
+					"AmmoRocket, Rocket, k"					.. "\n" ..
+					"AmmoCell, Cell, d";
+			}
+
+			// Brutal Doom 64
+			else if ((playerclass == "64DoomPlayer" || playerclass == "Tactical64DoomPlayer") && checkinventory("Stamina"))
+			{
+				ammoassignment =
+					"SawGas, Fuel, i"						.. "\n" ..
+					"Clip, Bullet, u"						.. "\n" ..
+					"Shell, Shell, g"						.. "\n" ..
+					"RocketAmmo, Rocket, k"					.. "\n" ..
+					"Cell, Cell, d"							.. "\n" ..
+					"SoulAmmo, Soul, a";
+			}
+
+			// Death Foretold
+			else if (playerclass == "Doom4Player")
+			{
+				ammoassignment =
+					"D4Shells, Shell, g"					.. "\n" ..
+					"D4Bullets, Bullet, u"					.. "\n" ..
+					"D4Rockets, Rocket, k"					.. "\n" ..
+					"D4Cells, Cell, v"						.. "\n" ..
+					"D4Slugs, Slug, n"						.. "\n" ..
+					"D4Souls, Soul, a";
+			}
+
+			// Doom Incarnate
+			else if (playerclass == "BloodRayne" || playerclass == "CaptainBlazkowicz")
+			{
+				ammoassignment =
+					"9MMBullets, Clip, w"					.. "\n" ..
+					"MagnumBullets, Bullet, u"				.. "\n" ..
+					"ShotgunShells, Shell, g"				.. "\n" ..
+					"NATOBullets, Nato, p"					.. "\n" ..
+					"VenomAmmo, Venom, c"					.. "\n" ..
+					"ExplosiveSlugs, Slug, k"				.. "\n" ..
+					"NapalmAmmo, Fuel, i"					.. "\n" ..
+					"Battery, Battery, n"					.. "\n" ..
+					"FusionCell, Cell, v"					.. "\n" ..
+					"HatchetAmmo, Hatchet, z"				.. "\n" ..
+					"HandNadeAmmo, Grenade, q";
+			}
+
+			// Flakes Doom
+			else if (playerclass == "FKPlayer" && checkinventory("FirstTimeShotgunning"))
+			{
+				ammoassignment =
+					"Clip, Bullet, u"						.. "\n" ..
+					"Shell, Shell, g"						.. "\n" ..
+					"RocketAmmo, Rocket, k"					.. "\n" ..
+					"GrenadeAmmo, Grenade, q"				.. "\n" ..
+					"Cell, Cell, d";
+			}
+
+			// Final Doomer
+			else if (playerclass == "FDAliensPlayer")
+			{
+				ammoassignment =
+					"FDAliensShells, Shell, g"				.. "\n" ..
+					"FDAliensBullets, Bullet, u"			.. "\n" ..
+					"FDAliensRocket, Rocket, k"				.. "\n" ..
+					"FDAliensCell, Cell, v"					.. "\n" ..
+					"FDAliensBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDAlienVendettaPlayer")
+			{
+				ammoassignment =
+					"FDAlienVendettaShells, Shell, g"		.. "\n" ..
+					"FDAlienVendettaBullets, Bullet, u"		.. "\n" ..
+					"FDAlienVendettaRocket, Rocket, k"		.. "\n" ..
+					"FDAlienVendettaCell, Cell, v"			.. "\n" ..
+					"FDAlienVendettaBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDBTSXPlayer")
+			{
+				ammoassignment =
+					"FDBTSXShells, Shell, g"				.. "\n" ..
+					"FDBTSXBullets, Bullet, u"				.. "\n" ..
+					"FDBTSXRocket, Rocket, k"				.. "\n" ..
+					"FDBTSXCell, Cell, v"					.. "\n" ..
+					"FDBTSXBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDDoom2Player")
+			{
+				ammoassignment =
+					"FDDoom2Shells, Shell, g"				.. "\n" ..
+					"FDDoom2Bullets, Bullet, u"				.. "\n" ..
+					"FDDoom2Rocket, Rocket, k"				.. "\n" ..
+					"FDDoom2Cell, Cell, v"					.. "\n" ..
+					"FDDoom2BFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDHellboundPlayer")
+			{
+				ammoassignment =
+					"FDHellboundShells, Shell, g"			.. "\n" ..
+					"FDHellboundBullets, Bullet, u"			.. "\n" ..
+					"FDHellboundRocket, Rocket, k"			.. "\n" ..
+					"FDHellboundCell, Cell, v"				.. "\n" ..
+					"FDHellboundBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDJPCPPlayer")
+			{
+				ammoassignment =
+					"FDJPCPShells, Shell, g"				.. "\n" ..
+					"FDJPCPBullets, Bullet, u"				.. "\n" ..
+					"FDJPCPRocket, Rocket, k"				.. "\n" ..
+					"FDJPCPCell, Cell, v"					.. "\n" ..
+					"FDJPCPBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDPlutPlayer")
+			{
+				ammoassignment =
+					"FDPlutShells, Shell, g"				.. "\n" ..
+					"FDPlutBullets, Bullet, u"				.. "\n" ..
+					"FDPlutRocket, Rocket, k"				.. "\n" ..
+					"FDPlutCell, Cell, v"					.. "\n" ..
+					"FDPlutBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDTNTPlayer")
+			{
+				ammoassignment =
+					"FDTNTShells, Shell, g"					.. "\n" ..
+					"FDTNTBullets, Bullet, u"				.. "\n" ..
+					"FDTNTRocket, Rocket, k"				.. "\n" ..
+					"FDTNTCell, Cell, v"					.. "\n" ..
+					"FDTNTBFGCharge, BFG, d";
+			}
+			else if (playerclass == "FDWhitemarePlayer")
+			{
+				ammoassignment =
+					"FDWhitemareShells, Shell, g"			.. "\n" ..
+					"FDWhitemareBullets, Bullet, u"			.. "\n" ..
+					"FDWhitemareRocket, Rocket, k"			.. "\n" ..
+					"FDWhitemareCell, Cell, v"				.. "\n" ..
+					"FDWhitemareBFGCharge, BFG, d";
+			}
+
+			// Heretic, Shazam
+			else if (playerclass == "HereticPlayer" || playerclass == "ShazamHereticPlayer")
+			{
+				ammoassignment =
+					"GoldWandAmmo, Wand, f"					.. "\n" ..
+					"CrossbowAmmo, Arrow, d"				.. "\n" ..
+					"BlasterAmmo, Claw, n"					.. "\n" ..
+					"SkullRodAmmo, Hell, g"					.. "\n" ..
+					"PhoenixRodAmmo, Flame, k"				.. "\n" ..
+					"MaceAmmo, Mace, u";
+			}
+
+			// Hexen
+			else if (playerclass == "ClericPlayer" || playerclass == "FighterPlayer" || playerclass == "MagePlayer")
+			{
+				ammoassignment =
+					"Mana1, Blue, n"						.. "\n" ..
+					"Mana2, Green, d";
+			}
+
+			// NAKU-NARU
+			else if (playerclass == "NewPlayer")
+			{
+				ammoassignment =
+					"Ammo44, .38, u"						.. "\n" ..
+					"shells12gauge, Shell, g"				.. "\n" ..
+					"Ammo9mm, 9mm, w"						.. "\n" ..
+					"Ammo84mm, Slug, k"						.. "\n" ..
+					"Ammo77, 7mm, b"						.. "\n" ..
+					"Ammo556, 5mm, p"						.. "\n" ..
+					"TotalSkulls, Skull, a";
+			}
+			
+			// Project Brutality
+			else if (playerclass == "PB_Doomer")
+			{
+				ammoassignment =
+					"PistolBullets, Clip, w"				.. "\n" ..
+					"NewClip, Bullet, u"					.. "\n" ..
+					"NewShell, Shell, g"					.. "\n" ..
+					"RocketAmmo, Rocket, k"					.. "\n" ..
+					"Cell, Cell, d"							.. "\n" ..
+					"Gas, Fuel, i"							.. "\n" ..
+					"DemonPower, Soul, a"					.. "\n" ..
+					"HandGrenadeAmmo, Grenade, q"			.. "\n" ..
+					"MineAmmo, Mine, z"						.. "\n" ..
+					"StunGrenadeAmmo, Stun, n";
+			}
+
+			// Weapons of Saturn
+			else if (playerclass == "PistolPlayer" || playerclass == "RiflePlayer")
+			{
+				ammoassignment =
+					"Clip, Clip, w"							.. "\n" ..
+					"Bullets, Bullet, u"					.. "\n" ..
+					"Shell, Shell, g"						.. "\n" ..
+					"RifleAmmo, Rifle, b"					.. "\n" ..
+					"Nato, Nato, p"							.. "\n" ..
+					"RocketAmmo, Rocket, k"					.. "\n" ..
+					"Cell, Cell, d";
+			}
+
+			// Doom
+			else
+			{
+				if (playerclass != "DoomPlayer")
+					standard = "1";
+
+				ammoassignment =
+					"Clip, Bullet, u"						.. "\n" ..
+					"Shell, Shell, g"						.. "\n" ..
+					"RocketAmmo, Rocket, k"					.. "\n" ..
+					"Cell, Cell, d";
+			}
+		}
+
+		return standard .. ammoassignment;
+	}
+
+	ui private static bool checkinventory(string inventoryitem)
+	{
+		playerinfo player = players[consoleplayer];
+
+		for (inventory item = player.mo.inv; item != null; item = item.inv)
+		{
+			if (item.getclassname() == inventoryitem)
+				return true;
+		}
+
+		return false;
+	}
+
 	ui private static int getconsoleplayer()
 	{
 		return consoleplayer;
+	}
+}
+
+class ammoinfohandler : eventhandler
+{
+	override void consoleprocess (consoleevent e)
+	{
+		if (e.name ~== "ammoinspect")
+		{
+			ammo ammo1, ammo2;
+			playerinfo player = players[consoleplayer];
+
+			console.printf("Player: %s", player.mo.getclassname());
+
+			if (player.readyweapon)
+			{
+				ammo1 = player.readyweapon.ammo1;
+				ammo2 = player.readyweapon.ammo2;
+			}
+
+			if (ammo1)
+				console.printf("Ammo1: %s", ammo1.getclassname());
+
+			if (ammo2)
+				console.printf("Ammo2: %s", ammo2.getclassname());
+		}
 	}
 }

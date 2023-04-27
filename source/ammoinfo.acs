@@ -4,7 +4,6 @@
 
 #library "ammoinfo"
 #include "zcommon.acs"
-#include "ammoassign.acs"
 
 #define AI_BASECOLOR	CR_WHITE
 #define AI_COLOR_DARK	"u"
@@ -20,8 +19,12 @@
 #define AI_SPACE		"`"
 #define AI_TICRATE		35
 #define AI_TIME			(AI_REFRESH << 16) / AI_TICRATE + 1
+#define AI_TOTAL		25
 
+bool standard;
 int highlight[AI_TOTAL];
+int total;
+str ammo[AI_TOTAL][3];
 str text[AI_TOTAL];
 str value[AI_TOTAL][3];
 
@@ -73,12 +76,201 @@ function void alignvalue(bool align, int showpercentage)
 	}
 }
 
+function void ammoassign(str ammostring)
+{
+	ammostring = sanitizeammo(ammostring);
+
+	if (!strcmp(ammostring, ""))
+		return;
+
+	bool error, restricted;
+	int argumentlength, count, length, splitlength, splitstart, start;
+	int max = 3;
+	int prefix = 1;
+	str argument = "", classassign = "", classargument = "", split = "";
+	str class = getactorclass(0);
+	str delimiter = ",";
+
+	if (strleft(ammostring, prefix) == "1")
+		standard = true;
+
+	length = strlen(ammostring) - prefix;
+	ammostring = strright(ammostring, length);
+
+	for (int i = 0; i < length; i++)
+	{
+		if (total == AI_TOTAL)
+			break;
+
+		if (!strcmp(strmid(ammostring, i, 1), "\n") || i + 1 == length)
+		{
+			split = trim(strmid(strleft(ammostring, i + 1), start, length - start), 1);
+
+			if (!stricmp(strleft(split, 6), "class "))
+			{
+				classassign = strright(split, strlen(split) - 6);
+				split = "";
+
+				if (strcmp(classassign, trim(classassign, 0)))
+				{
+					error = true;
+					errormessage(3);
+					break;
+				}
+
+				if (!stricmp(classassign, "unset"))
+				{
+					if (!strcmp(classargument, ""))
+					{
+						error = true;
+						errormessage(4);
+						break;
+					}
+
+					classassign = "";
+				}
+
+				classargument = classassign;
+			}
+			else if (strcmp(classargument, "") && stricmp(class, classargument))
+			{
+				restricted = true;
+			}
+
+			if (strcmp(split, ""))
+			{
+				splitlength = strlen(split);
+
+				for (int x = 0; x < splitlength; x++)
+				{
+					if (!strcmp(strmid(split, x, 1), delimiter) || x + 1 == splitlength)
+					{
+						if (count < max)
+						{
+							argument = trim(strmid(strleft(split, x + 1), splitstart, splitlength - splitstart), 1);
+
+							if (!strcmp(strright(argument, 1), delimiter))
+							{
+								argumentlength = strlen(argument);
+
+								if (argumentlength > 1)
+									argument = strleft(argument, argumentlength - 1);
+								else
+									argument = "";
+							}
+
+							if (strcmp(argument, ""))
+							{
+								if (count == 2)
+								{
+									if (!stricmp(argument, "default"))
+									{
+										argument = "";
+									}
+									else if (!validchar(argument, 1))
+									{
+										error = true;
+										errormessage(count);
+										break;
+									}
+								}
+
+								if (!restricted)
+									ammo[total][count] = argument;
+
+							}
+							else
+							{
+								error = true;
+								errormessage(count);
+								break;
+							}
+						}
+						else
+						{
+							error = true;
+							errormessage(5);
+							break;
+						}
+
+						count++;
+						splitstart = x + 1;
+					}
+				}
+
+				if (!error && count < max)
+				{
+					error = true;
+					errormessage(count);
+				}
+
+				if (error)
+					break;
+
+				count = 0;
+				splitstart = 0;
+
+				if (!restricted)
+					total++;
+			}
+
+			restricted = false;
+			start = i + 1;
+		}
+	}
+
+	if (error || !strcmp(argument, ""))
+	{
+		if (!error)
+			errormessage(-1);
+
+		total = 0;
+	}
+}
+
 function str coloredtext(str color, str string, bool addcolor)
 {
 	if (addcolor)
 		return strparam(s:"\c", s:color, s:string, s:"\c-");
 
 	return string;
+}
+
+function void errormessage(int type)
+{
+	str message = "";
+
+	switch (type)
+	{
+		case 0:
+			message = "An ammo class is missing or invalid.";
+			break;
+
+		case 1:
+			message = "An ammo name is missing or invalid.";
+			break;
+
+		case 2:
+			message = "An ammo color is missing or invalid.";
+			break;
+
+		case 3:
+			message = "A supplied player class is invalid.";
+			break;
+
+		case 4:
+			message = "There is no player class to unset.";
+			break;
+
+		case 5:
+			message = "A supplied argument is invalid.";
+			break;
+
+		default:
+			message = "No ammo assignment has been found.";
+	}
+
+	log(s:"AmmoInfo error: ", s:message);
 }
 
 function str generatespace(int amount, int type)
@@ -165,6 +357,27 @@ function str newline(str string)
 	return string;
 }
 
+function str sanitizeammo(str ammostring)
+{
+	bool invalid;
+	str item = "", sanitized = "";
+
+	for (int i = 0; i < strlen(ammostring); i++)
+	{
+		item = strmid(ammostring, i, 1);
+
+		if (!strcmp(strmid(ammostring, i, 2), "//"))
+			invalid = true;
+		else if (invalid && !strcmp(item, "\n"))
+			invalid = false;
+
+		if (!invalid && validchar(item, 0))
+			sanitized = strparam(s:sanitized, s:item);
+	}
+
+	return sanitized;
+}
+
 function void spaceright(str space, int align)
 {
 	int i = maxlength(align, true, 0);
@@ -173,6 +386,59 @@ function void spaceright(str space, int align)
 		text[i] = strparam(s:text[i], s:space);
 	else
 		value[i][0] = strparam(s:value[i][0], s:space);
+}
+
+function str trim(str string, int type)
+{
+	while (trimchar(strleft(string, 1), type))
+		string = strright(string, strlen(string) - 1);
+
+	while (trimchar(strright(string, 1), type))
+		string = strleft(string, strlen(string) - 1);
+
+	return string;
+}
+
+function bool trimchar(str char, int type)
+{
+	if (strlen(char) == 1)
+	{
+		int start;
+		int chars = 4;
+		str trimchars[4] = { ",", ".", "\n", " " };
+
+		if (type)
+			start = 2;
+
+		for (int i = start; i < chars; i++)
+		{
+			if (!stricmp(char, trimchars[i]))
+				return true;
+		}
+	}
+
+	return false;
+}
+
+function bool validchar(str char, int type)
+{
+	if (strlen(char) == 1)
+	{
+		int start;
+		int chars = 40;
+		str validchars[40] = { ",", ".", "\n", " ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+
+		if (type)
+			start = 14;
+
+		for (int i = start; i < chars; i++)
+		{
+			if (!stricmp(char, validchars[i]))
+				return true;
+		}
+	}
+
+	return false;
 }
 
 /*-------\
@@ -441,15 +707,7 @@ script "ammoinfoenter" ENTER
 	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
 		terminate;
 
-	for (int i = 0; i < total; i++)
-	{
-		text[i] = "";
-		value[i][0] = "";
-		value[i][1] = "";
-		value[i][2] = "";
-	}
-
-	ammoassign(getactorclass(0));
+	ammoassign(scriptcall("ammoinfobridge", "ammoassign"));
 	acs_namedexecute("ammoinfo", 0);
 }
 

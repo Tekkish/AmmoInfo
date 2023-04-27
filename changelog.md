@@ -1,3 +1,7 @@
+## April 26, 2023 (v1.33)
+- Added a custom lump that can be used to modify the ammo list without editing source code.
+- Moved internal ammo assignments to ZScript to avoid having to recompile the ACS when making changes.
+
 ## April 12, 2023 (v1.32)
 - Updated support for Doom Incarnate.
 
