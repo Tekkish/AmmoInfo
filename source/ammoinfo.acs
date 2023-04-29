@@ -708,7 +708,7 @@ script "ammoinfoenter" ENTER
 		terminate;
 
 	ammoassign(scriptcall("ammoinfobridge", "ammoassign"));
-	acs_namedexecute("ammoinfo", 0);
+	acs_namedexecutewithresult("ammoinfo", 0);
 }
 
 script "ammoinforespawn" RESPAWN
@@ -719,5 +719,5 @@ script "ammoinforespawn" RESPAWN
 	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
 		terminate;
 
-	acs_namedexecute("ammoinfo", 0);
+	acs_namedexecutewithresult("ammoinfo", 0);
 }
