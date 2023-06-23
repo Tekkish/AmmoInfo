@@ -3,6 +3,7 @@ user bool ai_alignx = false;
 user bool ai_aligny = false;
 user bool ai_doomfont = false;
 user bool ai_hide = false;
+user bool ai_hidemissing = false;
 user bool ai_highlightvalue = false;
 user bool ai_showcolor = false;
 user bool ai_showonmap = false;

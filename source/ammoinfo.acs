@@ -552,7 +552,7 @@ function void ammoinfo(void)
 
 		for (i = 0; i < total; i++)
 		{
-			capacity = maxnumber(getammocapacity(ammo[i][0]), AI_MAXNUMBER);
+			capacity = maxnumber(scriptcall("ammoinfobridge", "getcapacity", ammo[i][0]), AI_MAXNUMBER);
 
 			if (capacity)
 			{

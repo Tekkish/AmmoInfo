@@ -10,6 +10,7 @@ OptionMenu "AI_Options"
 	StaticText ""
 	StaticText "General Options", 1
 	ScaleSlider "Abbreviated Characters", "ai_abbreviate", 0, 8, 1, "None"
+	Option "Hide Ammo for Missing Weapons", "ai_hidemissing", "AI_YesNo"
 	Option "Hide With Unknown Mods", "ai_hide", "AI_YesNo"
 	Option "Highlight Values", "ai_highlightvalue", "AI_YesNo"
 	Slider "Opacity Percentage", "ai_opacity", 10, 100, 1, 0

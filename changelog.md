@@ -1,3 +1,8 @@
+## June 23, 2023 (v1.36)
+- Added an option to hide ammo for missing weapons.
+- Changed how ammo is detected for better compatibility with newer mods.
+- Updated support for Project Brutality.
+
 ## April 29, 2023 (v1.35)
 - Fixed an oversight that caused a loading delay when spawning.
 

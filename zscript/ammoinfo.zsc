@@ -251,16 +251,17 @@ class ammoinfobridge
 			else if (playerclass == "PB_Doomer")
 			{
 				ammoassignment =
-					"PistolBullets, Clip, w"				.. "\n" ..
-					"NewClip, Bullet, u"					.. "\n" ..
-					"NewShell, Shell, g"					.. "\n" ..
-					"RocketAmmo, Rocket, k"					.. "\n" ..
-					"Cell, Cell, d"							.. "\n" ..
-					"Gas, Fuel, i"							.. "\n" ..
-					"DemonPower, Soul, a"					.. "\n" ..
-					"HandGrenadeAmmo, Grenade, q"			.. "\n" ..
-					"MineAmmo, Mine, z"						.. "\n" ..
-					"StunGrenadeAmmo, Stun, n";
+					"PB_LowCalMag, Clip, w"					.. "\n" ..
+					"PB_HighCalMag, Bullet, u"				.. "\n" ..
+					"PB_Shell, Shell, g"					.. "\n" ..
+					"PB_RocketAmmo, Rocket, k"				.. "\n" ..
+					"PB_Cell, Cell, d"						.. "\n" ..
+					"PB_Fuel, Fuel, i"						.. "\n" ..
+					"PB_DTech, Soul, a"						.. "\n" ..
+					"PB_GrenadeAmmo, Grenade, q"			.. "\n" ..
+					"PB_QuickLauncherAmmo, Hellshot, r"		.. "\n" ..
+					"PB_ProxMineAmmo, Mine, z"				.. "\n" ..
+					"PB_StunGrenadeAmmo, Stun, n";
 			}
 
 			// Weapons of Saturn
@@ -295,15 +296,57 @@ class ammoinfobridge
 
 	ui private static bool checkinventory(string inventoryitem)
 	{
+		class<Inventory> inventory = inventoryitem;
 		playerinfo player = players[consoleplayer];
 
-		for (inventory item = player.mo.inv; item != null; item = item.inv)
-		{
-			if (item.getclassname() == inventoryitem)
-				return true;
-		}
+		let item = player.mo.findinventory(inventory);
+
+		if (item)
+			return true;
 
 		return false;
+	}
+
+	ui private static int getcapacity(string type)
+	{
+		bool found;
+		class<Ammo> ammotype = type;
+		int capacity;
+		playerinfo player = players[consoleplayer];
+
+		if (cvar.getcvar("ai_hidemissing", player).getbool())
+		{
+			for (let inventory = player.mo.inv; inventory != null; inventory = inventory.inv)
+			{
+				let weapon = weapon(inventory);
+
+				if (weapon && (ammotype == weapon.ammotype1 || ammotype == weapon.ammotype2))
+					found = true;
+			}
+		}
+		else
+		{
+			found = true;
+		}
+
+		if (found)
+		{
+			let item = player.mo.findinventory(ammotype);
+
+			if (item)
+			{
+				capacity = item.maxamount;
+			}
+			else
+			{
+				let default = getdefaultbytype(ammotype);
+
+				if (default)
+					capacity = default.maxamount;
+			}
+		}
+
+		return capacity;
 	}
 
 	ui private static int getconsoleplayer()
