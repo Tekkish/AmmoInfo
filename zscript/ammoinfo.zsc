@@ -309,8 +309,12 @@ class ammoinfobridge
 
 	ui private static int getcapacity(string type)
 	{
-		bool found;
 		class<Ammo> ammotype = type;
+
+		if (!ammotype)
+			return 0;
+
+		bool found;
 		int capacity;
 		playerinfo player = players[consoleplayer];
 

@@ -1,3 +1,6 @@
+## June 24, 2023 (v1.37)
+- Addressed a VM abort that could occur when using an AIASSIGN lump.
+
 ## June 23, 2023 (v1.36)
 - Added an option to hide ammo for missing weapons.
 - Changed how ammo is detected for better compatibility with newer mods.
