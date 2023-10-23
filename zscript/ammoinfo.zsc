@@ -372,6 +372,7 @@ class ammoinfohandler : eventhandler
 
 			if (player.readyweapon)
 			{
+				console.printf("Weapon: %s", player.readyweapon.getclassname());
 				ammo1 = player.readyweapon.ammo1;
 				ammo2 = player.readyweapon.ammo2;
 			}
@@ -381,6 +382,9 @@ class ammoinfohandler : eventhandler
 
 			if (ammo2)
 				console.printf("Ammo2: %s", ammo2.getclassname());
+
+			if (!ammo1 && !ammo2)
+				console.printf("Ammo: None");
 		}
 	}
 }
