@@ -95,11 +95,13 @@ class ammoinfobridge
 			else if (playerclass == "Doom4Player")
 			{
 				ammoassignment =
+					"D4Fuel, Fuel, x"						.. "\n" ..
 					"D4Shells, Shell, g"					.. "\n" ..
 					"D4Bullets, Bullet, u"					.. "\n" ..
 					"D4Rockets, Rocket, k"					.. "\n" ..
 					"D4Cells, Cell, v"						.. "\n" ..
 					"D4Slugs, Slug, n"						.. "\n" ..
+					"D4BFGAmmo, BFG, d"						.. "\n" ..
 					"D4Souls, Soul, a";
 			}
 
