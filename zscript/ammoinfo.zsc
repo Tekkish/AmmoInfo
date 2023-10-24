@@ -95,7 +95,7 @@ class ammoinfobridge
 			else if (playerclass == "Doom4Player")
 			{
 				ammoassignment =
-					"D4Fuel, Fuel, x"						.. "\n" ..
+					"D4Fuel, Fuel, i"						.. "\n" ..
 					"D4Shells, Shell, g"					.. "\n" ..
 					"D4Bullets, Bullet, u"					.. "\n" ..
 					"D4Rockets, Rocket, k"					.. "\n" ..
@@ -374,9 +374,9 @@ class ammoinfohandler : eventhandler
 
 			if (player.readyweapon)
 			{
-				console.printf("Weapon: %s", player.readyweapon.getclassname());
 				ammo1 = player.readyweapon.ammo1;
 				ammo2 = player.readyweapon.ammo2;
+				console.printf("Weapon: %s", player.readyweapon.getclassname());
 			}
 
 			if (ammo1)
