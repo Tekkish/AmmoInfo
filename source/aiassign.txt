@@ -14,7 +14,8 @@
 // AmmoClass is the class name assigned to an ammo type. AmmoName is the name you wish to display in the list. AmmoColor
 // is the color you wish to use when "show colored text" is enabled. This uses the ZDoom color codes found at
 // "https://zdoom.org/wiki/Print#Colors". If you do not wish to specify a color, you can set this to "default" and the
-// internal default (dark gray) will be used.
+// internal default (dark gray) will be used. To help obtain class names for your equipped weapon, you can use the console
+// command "event ammoinspect" (without quotes) while AmmoInfo is loaded.
 //
 // Here are some examples:
 //

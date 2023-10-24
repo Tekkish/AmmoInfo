@@ -1,3 +1,9 @@
+## October 24, 2023 (v1.38)
+- Added a text highlight option that can colorize relevant ammo for the equipped weapon.
+- Removed the old colorization option.
+- The ammoinspect command now also displays weapon class names.
+- Updated support for Death Foretold.
+
 ## June 24, 2023 (v1.37)
 - Addressed a VM abort that could occur when using an AIASSIGN lump.
 
@@ -14,6 +20,7 @@
 
 ## April 26, 2023 (v1.33)
 - Added a custom lump that can be used to modify the ammo list without editing source code.
+- Added a console command to display player and ammo class information.
 - Moved internal ammo assignments to ZScript to avoid having to recompile the ACS when making changes.
 
 ## April 12, 2023 (v1.32)

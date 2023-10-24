@@ -12,9 +12,9 @@ OptionMenu "AI_Options"
 	ScaleSlider "Abbreviated Characters", "ai_abbreviate", 0, 8, 1, "None"
 	Option "Hide Ammo for Missing Weapons", "ai_hidemissing", "AI_YesNo"
 	Option "Hide With Unknown Mods", "ai_hide", "AI_YesNo"
+	Option "Highlight Text", "ai_highlighttext", "AI_HighlightText"
 	Option "Highlight Values", "ai_highlightvalue", "AI_YesNo"
 	Slider "Opacity Percentage", "ai_opacity", 10, 100, 1, 0
-	Option "Show Colored Text", "ai_showcolor", "AI_YesNo"
 	Option "Show on Automap", "ai_showonmap", "AI_YesNo"
 	Option "Show Percentages", "ai_showpercentage", "AI_ShowPercentage"
 	Option "Use Doom Font", "ai_doomfont", "AI_YesNo"
@@ -53,6 +53,14 @@ OptionValue "AI_AlignY"
 {
 	0, "Top"
 	1, "Bottom"
+}
+
+OptionValue "AI_HighlightText"
+{
+	0, "No"
+	1, "Always Colorize"
+	2, "Relevant Ammo"
+	3, "Colorize Relevant Ammo"
 }
 
 OptionValue "AI_Position"

@@ -5,12 +5,14 @@ user bool ai_doomfont = false;
 user bool ai_hide = false;
 user bool ai_hidemissing = false;
 user bool ai_highlightvalue = false;
-user bool ai_showcolor = false;
 user bool ai_showonmap = false;
 user bool ai_visible = true;
 user int ai_abbreviate = 0;
+user int ai_highlighttext = 0;
 user int ai_opacity = 100;
 user int ai_position = 5;
 user int ai_showpercentage = 0;
 user int ai_x = 0;
 user int ai_y = 0;
+
+user noarchive bool ai_bridge_highlight;
