@@ -669,11 +669,10 @@ function void ammoinfo(void)
 
 		if (strcmp(texts, ""))
 		{
-			bool showonmap = getcvar("ai_showonmap");
 			int opacity = getcvar("ai_opacity");
 			str font = "SHAFONT";
 
-			if (showonmap)
+			if (getcvar("ai_showonmap"))
 				flags = AI_FLAGS;
 			else
 				flags = AI_FLAGS | HUDMSG_NOTWITHFULLMAP;

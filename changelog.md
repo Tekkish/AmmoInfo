@@ -1,3 +1,6 @@
+## October 26, 2023 (v1.39)
+- Minor code changes.
+
 ## October 24, 2023 (v1.38)
 - Added a text highlight option that can colorize relevant ammo for the equipped weapon.
 - Removed the old colorization option.
