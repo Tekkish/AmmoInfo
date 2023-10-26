@@ -243,12 +243,24 @@ class ammoinfobridge
 					"Ammo44, .38, u"						.. "\n" ..
 					"shells12gauge, Shell, g"				.. "\n" ..
 					"Ammo9mm, 9mm, w"						.. "\n" ..
-					"Ammo84mm, Slug, k"						.. "\n" ..
+					"Ammo84mm, Rocket, k"					.. "\n" ..
 					"Ammo77, 7mm, b"						.. "\n" ..
 					"Ammo556, 5mm, p"						.. "\n" ..
 					"TotalSkulls, Skull, a";
 			}
-			
+
+			// NAKU-NARU 2
+			else if (playerclass == "NakuPlayer")
+			{
+				ammoassignment =
+					"ammo9mm, 9mm, u"						.. "\n" ..
+					"Ammo12, Shell, g"						.. "\n" ..
+					"Ammo223, 5mm, w"						.. "\n" ..
+					"flashround, Rocket, k"					.. "\n" ..
+					"ammo77, 7mm, b"						.. "\n" ..
+					"Ki, Ki, n";
+			}
+
 			// Project Brutality
 			else if (playerclass == "PB_Doomer")
 			{

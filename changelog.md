@@ -1,4 +1,5 @@
 ## October 26, 2023 (v1.39)
+- Added support for NAKU-NARU 2.
 - Minor code changes.
 
 ## October 24, 2023 (v1.38)
