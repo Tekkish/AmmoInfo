@@ -278,6 +278,18 @@ class ammoinfobridge
 					"PB_StunGrenadeAmmo, Stun, n";
 			}
 
+			// Supercharge
+			else if (playerclass == "TangoPlayer")
+			{
+				ammoassignment =
+					"TangoBulletClip, Bullet, u"			.. "\n" ..
+					"TangoShell, Shell, g"					.. "\n" ..
+					"TangoScrapDrum, Scrap, w"				.. "\n" ..
+					"TangoStomperAmmo, Stomper, r"			.. "\n" ..
+					"TangoRocketAmmo, Rocket, k"			.. "\n" ..
+					"TangoCell, Cell, d";
+			}
+
 			// Weapons of Saturn
 			else if (playerclass == "PistolPlayer" || playerclass == "RiflePlayer")
 			{

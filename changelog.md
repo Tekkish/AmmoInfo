@@ -1,3 +1,6 @@
+## October 27, 2023 (v1.40)
+- Added support for Supercharge.
+
 ## October 26, 2023 (v1.39)
 - Added support for NAKU-NARU 2.
 - Minor code changes.
