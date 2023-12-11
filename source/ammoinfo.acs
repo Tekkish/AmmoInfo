@@ -178,7 +178,6 @@ function void ammoassign(str ammostring)
 
 								if (!restricted)
 									ammo[total][count] = argument;
-
 							}
 							else
 							{
