@@ -1,3 +1,6 @@
+## December 21, 2023 (v1.41)
+- Minor code changes.
+
 ## October 27, 2023 (v1.40)
 - Added support for Supercharge.
 

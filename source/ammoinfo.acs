@@ -91,6 +91,7 @@ function void ammoassign(str ammostring)
 	str argument = "", classassign = "", classargument = "", split = "";
 	str class = getactorclass(0);
 	str delimiter = ",";
+	int delimiterlength = strlen(delimiter);
 
 	if (strleft(ammostring, prefix) == "1")
 		standard = true;
@@ -144,18 +145,18 @@ function void ammoassign(str ammostring)
 
 				for (int x = 0; x < splitlength; x++)
 				{
-					if (!strcmp(strmid(split, x, 1), delimiter) || x + 1 == splitlength)
+					if (!strcmp(strmid(split, x, delimiterlength), delimiter) || x + 1 == splitlength)
 					{
 						if (count < max)
 						{
-							argument = trim(strmid(strleft(split, x + 1), splitstart, splitlength - splitstart), 1);
+							argument = trim(strmid(strleft(split, x + delimiterlength), splitstart, splitlength - splitstart), 1);
 
-							if (!strcmp(strright(argument, 1), delimiter))
+							if (!strcmp(strright(argument, delimiterlength), delimiter))
 							{
 								argumentlength = strlen(argument);
 
 								if (argumentlength > 1)
-									argument = strleft(argument, argumentlength - 1);
+									argument = strleft(argument, argumentlength - delimiterlength);
 								else
 									argument = "";
 							}
@@ -194,7 +195,7 @@ function void ammoassign(str ammostring)
 						}
 
 						count++;
-						splitstart = x + 1;
+						splitstart = x + delimiterlength;
 					}
 				}
 
