@@ -404,6 +404,16 @@ class ammoinfobridge
 	{
 		return consoleplayer;
 	}
+
+	ui private static bool getnoautosavehint()
+	{
+		bool noautosavehint;
+
+		if (level.info && level.info.flags2 & LEVEL2_NOAUTOSAVEHINT)
+			noautosavehint = true;
+
+		return noautosavehint;
+	}
 }
 
 class ammoinfohandler : eventhandler

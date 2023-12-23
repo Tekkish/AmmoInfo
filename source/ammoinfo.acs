@@ -709,10 +709,7 @@ script "ammoinfodeath" DEATH
 
 script "ammoinfoenter" ENTER
 {
-	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
-		terminate;
-
-	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer") || scriptcall("ammoinfobridge", "getnoautosavehint"))
 		terminate;
 
 	ammoassign(scriptcall("ammoinfobridge", "ammoassign"));
@@ -721,10 +718,7 @@ script "ammoinfoenter" ENTER
 
 script "ammoinforespawn" RESPAWN
 {
-	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
-		terminate;
-
-	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)))
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer") || scriptcall("ammoinfobridge", "getnoautosavehint"))
 		terminate;
 
 	acs_namedexecutewithresult("ammoinfo", 0);
