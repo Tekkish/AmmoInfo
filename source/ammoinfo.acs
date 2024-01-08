@@ -238,11 +238,6 @@ function str coloredtext(str color, str string, bool addcolor)
 	return string;
 }
 
-function int getcvarplayer(str cvar)
-{
-	return getusercvar(scriptcall(AI_BRIDGE, "getconsoleplayer"), cvar);
-}
-
 function void errormessage(int type)
 {
 	str message = "";
@@ -302,6 +297,11 @@ function str generatespace(int amount, int type)
 	}
 
 	return space;
+}
+
+function int getcvarplayer(str cvar)
+{
+	return getusercvar(scriptcall(AI_BRIDGE, "getconsoleplayer"), cvar);
 }
 
 function int maxlength(int align, bool index, int limit)
