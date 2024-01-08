@@ -410,6 +410,16 @@ class ammoinfobridge
 		return consoleplayer;
 	}
 
+	ui private static bool getdeath()
+	{
+		playerinfo player = players[consoleplayer];
+
+		if (player.mo is "PlayerChunk")
+			return true;
+
+		return false;
+	}
+
 	ui private static int getinventory(string inventoryitem)
 	{
 		class<Inventory> inventory = inventoryitem;

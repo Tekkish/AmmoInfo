@@ -23,7 +23,7 @@
 #define AI_TIME			(AI_REFRESH << 16) / AI_TICRATE + 1
 #define AI_TOTAL		25
 
-bool standard;
+bool killswitch, standard;
 int highlight[AI_TOTAL][2];
 int total;
 str ammo[AI_TOTAL][3];
@@ -700,17 +700,15 @@ function void ammoinfo(void)
 
 script "ammoinfo" (void)
 {
+	if (scriptcall(AI_BRIDGE, "getdeath"))
+	{
+		killswitch = true;
+		terminate;
+	}
+
 	ammoinfo();
 	delay(AI_REFRESH);
 	restart;
-}
-
-script "ammoinfodeath" DEATH
-{
-	if (playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer"))
-		terminate;
-
-	acs_namedterminate("ammoinfo", 0);
 }
 
 script "ammoinfoenter" ENTER
@@ -724,8 +722,12 @@ script "ammoinfoenter" ENTER
 
 script "ammoinforespawn" RESPAWN
 {
-	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer") || scriptcall(AI_BRIDGE, "getnoautosavehint"))
+	if (playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer") || scriptcall(AI_BRIDGE, "getnoautosavehint"))
 		terminate;
 
-	acs_namedexecutewithresult("ammoinfo", 0);
+	if (killswitch)
+	{
+		killswitch = false;
+		acs_namedexecutewithresult("ammoinfo", 0);
+	}
 }
