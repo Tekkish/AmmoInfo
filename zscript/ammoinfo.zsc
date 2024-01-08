@@ -8,7 +8,6 @@ class ammoinfobridge
 	{
 		int lump = -1;
 		int lumps;
-		playerinfo player = players[consoleplayer];
 		string ammoassignment;
 		string standard = "0";
 
@@ -26,7 +25,7 @@ class ammoinfobridge
 		}
 		else
 		{
-			string playerclass = player.mo.getclassname();
+			string playerclass = getclass();
 
 			// Argent
 			if (playerclass == "ArgPlayer")
@@ -400,9 +399,28 @@ class ammoinfobridge
 		return capacity;
 	}
 
+	ui private static string getclass()
+	{
+		playerinfo player = players[consoleplayer];
+		return player.mo.getclassname();
+	}
+
 	ui private static int getconsoleplayer()
 	{
 		return consoleplayer;
+	}
+
+	ui private static int getinventory(string inventoryitem)
+	{
+		class<Inventory> inventory = inventoryitem;
+		playerinfo player = players[consoleplayer];
+
+		let item = player.mo.findinventory(inventory);
+
+		if (item)
+			return item.amount;
+
+		return 0;
 	}
 
 	ui private static bool getnoautosavehint()

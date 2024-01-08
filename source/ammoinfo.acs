@@ -6,6 +6,7 @@
 #include "zcommon.acs"
 
 #define AI_BASECOLOR	CR_WHITE
+#define AI_BRIDGE		"ammoinfobridge"
 #define AI_COLOR_DARK	"u"
 #define AI_COLOR_DARKER	"m"
 #define AI_COLOR_LOW	"k"
@@ -89,7 +90,7 @@ function void ammoassign(str ammostring)
 	int max = 3;
 	int prefix = 1;
 	str argument = "", classassign = "", classargument = "", split = "";
-	str class = getactorclass(0);
+	str class = scriptcall(AI_BRIDGE, "getclass");
 	str delimiter = ",";
 	int delimiterlength = strlen(delimiter);
 
@@ -235,6 +236,11 @@ function str coloredtext(str color, str string, bool addcolor)
 		return strparam(s:"\c", s:color, s:string, s:"\c-");
 
 	return string;
+}
+
+function int getcvarplayer(str cvar)
+{
+	return getusercvar(scriptcall(AI_BRIDGE, "getconsoleplayer"), cvar);
 }
 
 function void errormessage(int type)
@@ -448,10 +454,10 @@ function bool validchar(str char, int type)
 
 function void ammoinfo(void)
 {
-	if (getcvar("ai_visible") && total && (!standard || (standard && !getcvar("ai_hide"))))
+	if (getcvarplayer("ai_visible") && total && (!standard || (standard && !getcvarplayer("ai_hide"))))
 	{
 		bool alignx, aligny;
-		bool position = getcvar("ai_position");
+		bool position = getcvarplayer("ai_position");
 		int offsetx = 1;
 		int offsety = 1;
 		int x, y;
@@ -460,10 +466,10 @@ function void ammoinfo(void)
 		switch (position)
 		{
 			case 0:
-				alignx = getcvar("ai_alignx");
-				aligny = getcvar("ai_aligny");
-				x = getcvar("ai_x");
-				y = getcvar("ai_y");
+				alignx = getcvarplayer("ai_alignx");
+				aligny = getcvarplayer("ai_aligny");
+				x = getcvarplayer("ai_x");
+				y = getcvarplayer("ai_y");
 
 				if (x < 0 || x > 90)
 					x = 0;
@@ -540,11 +546,11 @@ function void ammoinfo(void)
 				y = 0.5;
 		}
 
-		bool highlightvalue = getcvar("ai_highlightvalue");
+		bool highlightvalue = getcvarplayer("ai_highlightvalue");
 		int capacity, current, flags, i, percentage;
-		int abbreviate = getcvar("ai_abbreviate");
-		int highlighttext = getcvar("ai_highlighttext");
-		int showpercentage = getcvar("ai_showpercentage");
+		int abbreviate = getcvarplayer("ai_abbreviate");
+		int highlighttext = getcvarplayer("ai_highlighttext");
+		int showpercentage = getcvarplayer("ai_showpercentage");
 
 		if (abbreviate < 0 || abbreviate > 8)
 			abbreviate = 4;
@@ -557,12 +563,12 @@ function void ammoinfo(void)
 
 		for (i = 0; i < total; i++)
 		{
-			capacity = maxnumber(scriptcall("ammoinfobridge", "getcapacity", ammo[i][0]), AI_MAXNUMBER);
+			capacity = maxnumber(scriptcall(AI_BRIDGE, "getcapacity", ammo[i][0]), AI_MAXNUMBER);
 
 			if (capacity)
 			{
 				if (highlighttext == 2 || highlighttext == 3)
-					highlight[i][0] = getcvar("ai_bridge_highlight");
+					highlight[i][0] = getcvarplayer("ai_bridge_highlight");
 
 				if (strcmp(ammo[i][1], ""))
 					text[i] = ammo[i][1];
@@ -572,7 +578,7 @@ function void ammoinfo(void)
 				if (abbreviate)
 					text[i] = strleft(text[i], abbreviate);
 
-				current = maxnumber(checkinventory(ammo[i][0]), AI_MAXNUMBER);
+				current = maxnumber(scriptcall(AI_BRIDGE, "getinventory", ammo[i][0]), AI_MAXNUMBER);
 				percentage = 100 * current / capacity;
 
 				if (highlightvalue)
@@ -619,7 +625,7 @@ function void ammoinfo(void)
 		bool valuehighlight;
 		str spaceleft = "", textcolor = "", texts = "", valuecolor = "", values = "";
 
-		alignvalue(getcvar("ai_alignvalue"), showpercentage);
+		alignvalue(getcvarplayer("ai_alignvalue"), showpercentage);
 
 		if (!alignx)
 		{
@@ -669,15 +675,15 @@ function void ammoinfo(void)
 
 		if (strcmp(texts, ""))
 		{
-			int opacity = getcvar("ai_opacity");
+			int opacity = getcvarplayer("ai_opacity");
 			str font = "SHAFONT";
 
-			if (getcvar("ai_showonmap"))
+			if (getcvarplayer("ai_showonmap"))
 				flags = AI_FLAGS;
 			else
 				flags = AI_FLAGS | HUDMSG_NOTWITHFULLMAP;
 				
-			if (getcvar("ai_doomfont"))
+			if (getcvarplayer("ai_doomfont"))
 				font = "SHADFONT";
 
 			if (opacity < 10 || opacity > 100)
@@ -701,7 +707,7 @@ script "ammoinfo" (void)
 
 script "ammoinfodeath" DEATH
 {
-	if (playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer"))
+	if (playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer"))
 		terminate;
 
 	acs_namedterminate("ammoinfo", 0);
@@ -709,16 +715,16 @@ script "ammoinfodeath" DEATH
 
 script "ammoinfoenter" ENTER
 {
-	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer") || scriptcall("ammoinfobridge", "getnoautosavehint"))
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer") || scriptcall(AI_BRIDGE, "getnoautosavehint"))
 		terminate;
 
-	ammoassign(scriptcall("ammoinfobridge", "ammoassign"));
+	ammoassign(scriptcall(AI_BRIDGE, "ammoassign"));
 	acs_namedexecutewithresult("ammoinfo", 0);
 }
 
 script "ammoinforespawn" RESPAWN
 {
-	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall("ammoinfobridge", "getconsoleplayer") || scriptcall("ammoinfobridge", "getnoautosavehint"))
+	if (!strcmp("TITLEMAP", strparam(n:PRINTNAME_LEVEL)) || playernumber() != scriptcall(AI_BRIDGE, "getconsoleplayer") || scriptcall(AI_BRIDGE, "getnoautosavehint"))
 		terminate;
 
 	acs_namedexecutewithresult("ammoinfo", 0);
