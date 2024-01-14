@@ -24,8 +24,8 @@
 #define AI_TOTAL		25
 
 bool killswitch, standard;
+int consoleplayer, total;
 int highlight[AI_TOTAL][2];
-int total;
 str ammo[AI_TOTAL][3];
 str text[AI_TOTAL];
 str value[AI_TOTAL][3];
@@ -301,7 +301,7 @@ function str generatespace(int amount, int type)
 
 function int getcvarplayer(str cvar)
 {
-	return getusercvar(scriptcall(AI_BRIDGE, "getconsoleplayer"), cvar);
+	return getusercvar(consoleplayer, cvar);
 }
 
 function int maxlength(int align, bool index, int limit)
@@ -706,6 +706,7 @@ script "ammoinfo" (void)
 		terminate;
 	}
 
+	consoleplayer = scriptcall(AI_BRIDGE, "getconsoleplayer");
 	ammoinfo();
 	delay(AI_REFRESH);
 	restart;
