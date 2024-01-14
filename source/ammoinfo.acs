@@ -718,7 +718,7 @@ script "ammoinfoenter" ENTER
 		terminate;
 
 	ammoassign(scriptcall(AI_BRIDGE, "ammoassign"));
-	acs_namedexecutewithresult("ammoinfo", 0);
+	acs_namedexecutewithresult("ammoinfo");
 }
 
 script "ammoinforespawn" RESPAWN
@@ -729,6 +729,6 @@ script "ammoinforespawn" RESPAWN
 	if (killswitch)
 	{
 		killswitch = false;
-		acs_namedexecutewithresult("ammoinfo", 0);
+		acs_namedexecutewithresult("ammoinfo");
 	}
 }
