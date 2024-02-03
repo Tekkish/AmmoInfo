@@ -1,3 +1,6 @@
+## February 3, 2024 (v1.46)
+- Updated missing support for Strife.
+
 ## January 14, 2024 (v1.45)
 - Minor performance optimizations.
 
