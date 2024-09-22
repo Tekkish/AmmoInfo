@@ -54,18 +54,18 @@ class ammoinfobridge
 			}
 
 			// Brutal Doom
-			else if (playerclass == "BDoomer" || playerclass == "Doomer2" || playerclass == "TacticalDoomer")
+			else if (playerclass == "BDoomer" || playerclass == "Doomer2" || playerclass == "Doomer3" || playerclass == "TacticalDoomer")
 			{
 				ammoassignment =
 					"Clip1, Clip, w"							.. "\n" ..
+					"Mauser9MM, 9MM, b"						.. "\n" ..
 					"AmmoShell, Shell, g"						.. "\n" ..
+					"SniperAmmo, Sniper, p"						.. "\n" ..
 					"Clip2, Bullet, u"							.. "\n" ..
-					"BuzzSawAmmo, Buzzsaw, p"					.. "\n" ..
 					"AmmoRocket, Rocket, k"						.. "\n" ..
-					"Nuke, Nuke, s"								.. "\n" ..
 					"AmmoCell, Cell, d"							.. "\n" ..
-					"SoulAmmo, Soul, a"							.. "\n" ..
 					"MiniHellRocketAmmo, Hellshot, r"			.. "\n" ..
+					"SoulAmmo, Soul, a"							.. "\n" ..
 					"Gas, Fuel, i"								.. "\n" ..
 					"GrenadeAmmo, Grenade, q";
 			}
