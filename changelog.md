@@ -1,3 +1,6 @@
+## September 22, 2024 (v1.47)
+- Added compatibility for Brutal Doom 22.
+
 ## February 3, 2024 (v1.46)
 - Updated missing support for Strife.
 
