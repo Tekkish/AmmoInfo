@@ -58,7 +58,7 @@ class ammoinfobridge
 			{
 				ammoassignment =
 					"Clip1, Clip, w"							.. "\n" ..
-					"Mauser9MM, 9MM, b"						.. "\n" ..
+					"Mauser9MM, 9MM, b"							.. "\n" ..
 					"AmmoShell, Shell, g"						.. "\n" ..
 					"SniperAmmo, Sniper, p"						.. "\n" ..
 					"Clip2, Bullet, u"							.. "\n" ..
