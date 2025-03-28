@@ -1,3 +1,6 @@
+## March 27, 2025 (v1.48)
+- Added support for language translations.
+
 ## September 22, 2024 (v1.47)
 - Added compatibility for Brutal Doom 22.
 

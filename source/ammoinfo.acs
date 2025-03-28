@@ -245,34 +245,34 @@ function void errormessage(int type)
 	switch (type)
 	{
 		case 0:
-			message = "An ammo class is missing or invalid.";
+			message = "AI_ERROR_AMMOCLASSINVALID";
 			break;
 
 		case 1:
-			message = "An ammo name is missing or invalid.";
+			message = "AI_ERROR_AMMONAMEINVALID";
 			break;
 
 		case 2:
-			message = "An ammo color is missing or invalid.";
+			message = "AI_ERROR_AMMOCOLORINVALID";
 			break;
 
 		case 3:
-			message = "A supplied player class is invalid.";
+			message = "AI_ERROR_PLAYERCLASSINVALID";
 			break;
 
 		case 4:
-			message = "There is no player class to unset.";
+			message = "AI_ERROR_PLAYERCLASSUNSET";
 			break;
 
 		case 5:
-			message = "A supplied argument is invalid.";
+			message = "AI_ERROR_ARGUMENTINVALID";
 			break;
 
 		default:
-			message = "No ammo assignment has been found.";
+			message = "AI_ERROR_NOASSIGNMENT";
 	}
 
-	log(s:"AmmoInfo error: ", s:message);
+	log(l:"AI_ERROR", l:message);
 }
 
 function str generatespace(int amount, int type)

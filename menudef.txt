@@ -1,88 +1,88 @@
 AddOptionMenu "OptionsMenu"
 {
-	Submenu "AmmoInfo Options", "AI_Options"
+	Submenu "$AI_MENU_TITLE", "AI_Options"
 }
 
 OptionMenu "AI_Options"
 {
-	Title "AmmoInfo Options"
-	Option "Show AmmoInfo", "ai_visible", "AI_YesNo"
+	Title "$AI_MENU_TITLE"
+	Option "$AI_OPTION_VISIBLE", "ai_visible", "AI_YesNo"
 	StaticText ""
-	StaticText "General Options", 1
-	ScaleSlider "Abbreviated Characters", "ai_abbreviate", 0, 8, 1, "None"
-	Option "Hide Ammo for Missing Weapons", "ai_hidemissing", "AI_YesNo"
-	Option "Hide With Unknown Mods", "ai_hide", "AI_YesNo"
-	Option "Highlight Text", "ai_highlighttext", "AI_HighlightText"
-	Option "Highlight Values", "ai_highlightvalue", "AI_YesNo"
-	Slider "Opacity Percentage", "ai_opacity", 10, 100, 1, 0
-	Option "Show on Automap", "ai_showonmap", "AI_YesNo"
-	Option "Show Percentages", "ai_showpercentage", "AI_ShowPercentage"
-	Option "Use Doom Font", "ai_doomfont", "AI_YesNo"
-	Option "Value Alignment", "ai_alignvalue", "AI_AlignValue"
+	StaticText "$AI_MENU_GENERAL", 1
+	ScaleSlider "$AI_OPTION_ABBREVIATE", "ai_abbreviate", 0, 8, 1, "$AI_VALUE_NONE"
+	Option "$AI_OPTION_HIDEMISSING", "ai_hidemissing", "AI_YesNo"
+	Option "$AI_OPTION_HIDE", "ai_hide", "AI_YesNo"
+	Option "$AI_OPTION_HIGHLIGHTTEXT", "ai_highlighttext", "AI_HighlightText"
+	Option "$AI_OPTION_HIGHLIGHTVALUE", "ai_highlightvalue", "AI_YesNo"
+	Slider "$AI_OPTION_OPACITY", "ai_opacity", 10, 100, 1, 0
+	Option "$AI_OPTION_SHOWONMAP", "ai_showonmap", "AI_YesNo"
+	Option "$AI_OPTION_SHOWPERCENTAGE", "ai_showpercentage", "AI_ShowPercentage"
+	Option "$AI_OPTION_DOOMFONT", "ai_doomfont", "AI_YesNo"
+	Option "$AI_OPTION_ALIGNVALUE", "ai_alignvalue", "AI_AlignValue"
 	StaticText ""
-	StaticText "Position Options", 1
-	StaticText "You can specify a custom position"
-	StaticText "for AmmoInfo below. Note that it's"
-	StaticText "possible to exceed the boundries of the"
-	StaticText "screen if a low resolution is being used."
+	StaticText "$AI_MENU_POSITION", 1
+	StaticText "$AI_MENU_TEXT_POSITION1"
+	StaticText "$AI_MENU_TEXT_POSITION2"
+	StaticText "$AI_MENU_TEXT_POSITION3"
+	StaticText "$AI_MENU_TEXT_POSITION4"
 	StaticText ""
-	Option "Position Preset", "ai_position", "AI_Position"
+	Option "$AI_OPTION_POSITION", "ai_position", "AI_Position"
 	StaticText ""
-	StaticText "If the chosen preset is custom, you"
-	StaticText "can further tweak the position below."
+	StaticText "$AI_MENU_TEXT_PRESET1"
+	StaticText "$AI_MENU_TEXT_PRESET2"
 	StaticText ""
-	Option "Horizontal Alignment", "ai_alignx", "AI_AlignX"
-	Slider "Horizontal Position", "ai_x", 0, 90, 1, 0
-	Option "Vertical Alignment", "ai_aligny", "AI_AlignY"
-	Slider "Vertical Position", "ai_y", 0, 50, 1, 0
+	Option "$AI_OPTION_ALIGNX", "ai_alignx", "AI_AlignX"
+	Slider "$AI_OPTION_X", "ai_x", 0, 90, 1, 0
+	Option "$AI_OPTION_ALIGNY", "ai_aligny", "AI_AlignY"
+	Slider "$AI_OPTION_Y", "ai_y", 0, 50, 1, 0
 }
 
 OptionValue "AI_AlignValue"
 {
-	0, "Standard"
-	1, "Numeric"
+	0, "$AI_VALUE_STANDARD"
+	1, "$AI_VALUE_NUMERIC"
 }
 
 OptionValue "AI_AlignX"
 {
-	0, "Left"
-	1, "Right"
+	0, "$AI_VALUE_LEFT"
+	1, "$AI_VALUE_RIGHT"
 }
 
 OptionValue "AI_AlignY"
 {
-	0, "Top"
-	1, "Bottom"
+	0, "$AI_VALUE_TOP"
+	1, "$AI_VALUE_BOTTOM"
 }
 
 OptionValue "AI_HighlightText"
 {
-	0, "No"
-	1, "Always Colorize"
-	2, "Relevant Ammo"
-	3, "Colorize Relevant Ammo"
+	0, "$AI_VALUE_NO"
+	1, "$AI_VALUE_ALWAYSCOLORIZE"
+	2, "$AI_VALUE_RELEVANTAMMO"
+	3, "$AI_VALUE_COLORIZERELEVANT"
 }
 
 OptionValue "AI_Position"
 {
-	0, "Custom"
-	1, "Top Left"
-	2, "Center Left"
-	3, "Bottom Left"
-	4, "Top Right"
-	5, "Center Right"
-	6, "Bottom Right"
+	0, "$AI_VALUE_CUSTOM"
+	1, "$AI_VALUE_TOPLEFT"
+	2, "$AI_VALUE_CENTERLEFT"
+	3, "$AI_VALUE_BOTTOMLEFT"
+	4, "$AI_VALUE_TOPRIGHT"
+	5, "$AI_VALUE_CENTERRIGHT"
+	6, "$AI_VALUE_BOTTOMRIGHT"
 }
 
 OptionValue "AI_ShowPercentage"
 {
-	0, "No"
-	1, "With Ammo Counts"
-	2, "Replace Ammo Counts"
+	0, "$AI_VALUE_NO"
+	1, "$AI_VALUE_WITHAMMO"
+	2, "$AI_VALUE_REPLACEAMMO"
 }
 
 OptionValue "AI_YesNo"
 {
-	0, "No"
-	1, "Yes"
+	0, "$AI_VALUE_NO"
+	1, "$AI_VALUE_YES"
 }

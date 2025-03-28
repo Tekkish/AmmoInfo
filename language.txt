@@ -1,0 +1,59 @@
+[enu default]
+
+AI_ERROR = "AmmoInfo error: ";
+AI_ERROR_AMMOCLASSINVALID = "An ammo class is missing or invalid.";
+AI_ERROR_AMMOCOLORINVALID = "An ammo color is missing or invalid.";
+AI_ERROR_AMMONAMEINVALID = "An ammo name is missing or invalid.";
+AI_ERROR_ARGUMENTINVALID = "A supplied argument is invalid.";
+AI_ERROR_NOASSIGNMENT = "No ammo assignment has been found.";
+AI_ERROR_PLAYERCLASSINVALID = "A supplied player class is invalid.";
+AI_ERROR_PLAYERCLASSUNSET = "There is no player class to unset.";
+
+AI_MENU_GENERAL = "General Options";
+AI_MENU_POSITION = "Position Options";
+AI_MENU_TEXT_POSITION1 = "You can specify a custom position";
+AI_MENU_TEXT_POSITION2 = "for AmmoInfo below. Note that it's";
+AI_MENU_TEXT_POSITION3 = "possible to exceed the boundries of the";
+AI_MENU_TEXT_POSITION4 = "screen if a low resolution is being used.";
+AI_MENU_TEXT_PRESET1 = "If the chosen preset is custom, you";
+AI_MENU_TEXT_PRESET2 = "can further tweak the position below.";
+AI_MENU_TITLE = "AmmoInfo Options";
+
+AI_OPTION_ABBREVIATE = "Abbreviated Characters";
+AI_OPTION_ALIGNVALUE = "Value Alignment";
+AI_OPTION_ALIGNX = "Horizontal Alignment";
+AI_OPTION_ALIGNY = "Vertical Alignment";
+AI_OPTION_DOOMFONT = "Use Doom Font";
+AI_OPTION_HIDE = "Hide With Unknown Mods";
+AI_OPTION_HIDEMISSING = "Hide Ammo for Missing Weapons";
+AI_OPTION_HIGHLIGHTTEXT = "Highlight Text";
+AI_OPTION_HIGHLIGHTVALUE = "Highlight Values";
+AI_OPTION_OPACITY = "Opacity Percentage";
+AI_OPTION_POSITION = "Position Preset";
+AI_OPTION_SHOWONMAP = "Show on Automap";
+AI_OPTION_SHOWPERCENTAGE = "Show Percentages";
+AI_OPTION_VISIBLE = "Show AmmoInfo";
+AI_OPTION_X = "Horizontal Position";
+AI_OPTION_Y = "Vertical Position";
+
+AI_VALUE_ALWAYSCOLORIZE = "Always Colorize";
+AI_VALUE_BOTTOM = "Bottom";
+AI_VALUE_BOTTOMLEFT = "Bottom Left";
+AI_VALUE_BOTTOMRIGHT = "Bottom Right";
+AI_VALUE_CENTERLEFT = "Center Left";
+AI_VALUE_CENTERRIGHT = "Center Right";
+AI_VALUE_COLORIZERELEVANT = "Colorize Relevant Ammo";
+AI_VALUE_CUSTOM = "Custom";
+AI_VALUE_LEFT = "Left";
+AI_VALUE_NO = "No";
+AI_VALUE_NONE = "None";
+AI_VALUE_NUMERIC = "Numeric";
+AI_VALUE_REPLACEAMMO = "Replace Ammo Counts";
+AI_VALUE_RELEVANTAMMO = "Relevant Ammo";
+AI_VALUE_RIGHT = "Right";
+AI_VALUE_STANDARD = "Standard";
+AI_VALUE_TOP = "Top";
+AI_VALUE_TOPLEFT = "Top Left";
+AI_VALUE_TOPRIGHT = "Top Right";
+AI_VALUE_WITHAMMO = "With Ammo Counts";
+AI_VALUE_YES = "Yes";
