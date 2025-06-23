@@ -261,7 +261,7 @@ class ammoinfobridge
 			}
 
 			// Project Brutality
-			else if (playerclass == "PB_Doomer")
+			else if (playerclass == "PB_PlayerPawn")
 			{
 				ammoassignment =
 					"PB_LowCalMag, Clip, w"						.. "\n" ..

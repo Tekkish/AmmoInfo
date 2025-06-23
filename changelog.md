@@ -1,3 +1,6 @@
+## June 23, 2025 (v1.49)
+- Updated support for Project Brutality.
+
 ## March 27, 2025 (v1.48)
 - Added support for language translations.
 
