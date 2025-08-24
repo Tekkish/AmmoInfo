@@ -1,3 +1,6 @@
+## August 23, 2025 (v1.50)
+- Added support for Faspons and Legacy of Rust.
+
 ## June 23, 2025 (v1.49)
 - Updated support for Project Brutality.
 
