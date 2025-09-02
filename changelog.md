@@ -1,3 +1,6 @@
+## September 2, 2025 (v1.51)
+- Added support for Diamond Dragon.
+
 ## August 23, 2025 (v1.50)
 - Added support for Faspons and Legacy of Rust.
 

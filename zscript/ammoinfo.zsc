@@ -104,6 +104,18 @@ class ammoinfobridge
 					"D4Souls, Soul, a";
 			}
 
+			// Diamond Dragon
+			else if (playerclass == "Kiwi")
+			{
+				ammoassignment =
+					"9MMClip, Clip, u"							.. "\n" ..
+					"ShotgunShells, Shell, g"					.. "\n" ..
+					"BigAmmo, Bullet, w"						.. "\n" ..
+					"ExplosiveAmmoNades, Grenade, k"			.. "\n" ..
+					"AmmoBelt, Belt, v"							.. "\n" ..
+					"MissileAmmo, Nuke, d";
+			}
+
 			// Doom Incarnate
 			else if (playerclass == "BloodRayne" || playerclass == "CaptainBlazkowicz")
 			{
@@ -125,7 +137,7 @@ class ammoinfobridge
 			else if (playerclass == "FasPlayer")
 			{
 				ammoassignment =
-					"RifleAmmo, Rifle, u"						.. "\n" ..
+					"RifleAmmo, Bullet, u"						.. "\n" ..
 					"Shell, Shell, g"							.. "\n" ..
 					"Nato, Nato, p"								.. "\n" ..
 					"RocketAmmo, Rocket, k"						.. "\n" ..

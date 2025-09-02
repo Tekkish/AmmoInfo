@@ -18,6 +18,7 @@ AmmoInfo has been tested for use with the following mods:
 - Brutal Doom
 - Brutal Doom 64
 - Death Foretold
+- Diamond Dragon
 - Doom 64 Retribution
 - Doom Incarnate
 - Faspons
