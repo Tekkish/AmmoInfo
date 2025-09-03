@@ -111,9 +111,11 @@ class ammoinfobridge
 					"9MMClip, Clip, u"							.. "\n" ..
 					"ShotgunShells, Shell, g"					.. "\n" ..
 					"BigAmmo, Bullet, w"						.. "\n" ..
-					"ExplosiveAmmoNades, Grenade, k"			.. "\n" ..
+					"ExplosiveAmmoNades, MGLR, k"				.. "\n" ..
 					"AmmoBelt, Belt, v"							.. "\n" ..
-					"MissileAmmo, Nuke, d";
+					"MicroNuke, Nuke, d"						.. "\n" ..
+					"MissileAmmo, Missile, i"					.. "\n" ..
+					"GrenadePickup, Grenade, q";
 			}
 
 			// Doom Incarnate

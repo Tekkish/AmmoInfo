@@ -1,3 +1,7 @@
+## September 3, 2025 (v1.52)
+- Minor font changes.
+- Updated incorrect and missing ammo types for Diamond Dragon.
+
 ## September 2, 2025 (v1.51)
 - Added support for Diamond Dragon.
 
