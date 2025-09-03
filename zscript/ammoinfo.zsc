@@ -115,7 +115,8 @@ class ammoinfobridge
 					"AmmoBelt, Belt, v"							.. "\n" ..
 					"MicroNuke, Nuke, d"						.. "\n" ..
 					"MissileAmmo, Missile, i"					.. "\n" ..
-					"GrenadePickup, Grenade, q";
+					"GrenadePickup, Grenade, q"					.. "\n" ..
+					"ChargeMeter, Charge, a";
 			}
 
 			// Doom Incarnate
